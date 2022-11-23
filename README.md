@@ -20,3 +20,5 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+<i>Создан на Hack The Ice 4.0</i>
