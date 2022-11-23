@@ -1,4 +1,7 @@
-# spacyfie
+# playcify
+
+## О проекте:
+
 
 ## Project setup
 ```
