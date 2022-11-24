@@ -9,6 +9,7 @@
   "dependencies": {
     "bootstrap": "^5.2.3",
     "vue": "^3.0.0",
+    "vue-poll": "^0.1.8",
     "vue-router": "^4.0.0-0",
     "vue-webrtc": "^3.0.1"
   },
