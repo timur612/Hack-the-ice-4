@@ -1,17 +1,17 @@
 <template>
     <div>
-     <VueApexCharts type="line" width="650" :options="chartOptions" :series="series"></VueApexCharts>
+     <VueApexCharts type="bar" width="650" :options="chartOptions" :series="series"></VueApexCharts>
     </div>
 </template>
 
 <script>
 import VueApexCharts from "vue3-apexcharts"
 
-export default {
+export default {  
 components: {
     VueApexCharts
   },
-  data(){
+  data: function() { 
     return{
           
           series: [{
@@ -21,10 +21,16 @@ components: {
           chartOptions: {
             chart: {
               height: 350,
-              type: 'line',
+              type: 'Bar',
               zoom: {
                 enabled: false
               }
+            },
+            colors:['#795AD2'],
+            plotOptions:{
+                bar:{
+                    horizontal:true
+                }
             },
             dataLabels: {
               enabled: false
@@ -44,10 +50,13 @@ components: {
             },
             xaxis: {
               categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+            },
+            bar:{
+                horizontal: true
             }
           },
-    }
-          
+        }
         },
-}
+    }
+
 </script>
