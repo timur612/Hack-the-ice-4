@@ -11,7 +11,8 @@ export default {
 components: {
     VueApexCharts
   },
-  data: {
+  data(){
+    return{
           
           series: [{
               name: "Desktops",
@@ -45,7 +46,7 @@ components: {
               categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
             }
           },
-          
+    }
           
         },
 }
