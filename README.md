@@ -1,4 +1,4 @@
-# playcify
+# placify
 
 ## О проекте:
 
