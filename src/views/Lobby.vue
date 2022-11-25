@@ -22,7 +22,7 @@
                   width="100vw"
                   height="50vh"
                   :roomId="roomId"
-                  :enableAudio="true"
+                  :enableAudio="false"
                   :enableLogs="true"
                   v-on:joined-room="logEvent"
                   v-on:left-room="logEvent"
@@ -31,12 +31,22 @@
                   v-on:share-stopped="logEvent"
                   @error="onError" />
     <div :class="widgetsWindow ? '' : 'd-none'" class="container float-end border" style="margin-top:-0.6%;height:80vh;width:25%;background-color:white">
-        <div class="row">
+        <div class="row mt-3">
           <p class="col-sm-10 h4">Виджеты</p>
-          <a class="col-sm" @click="closeWindow" style="cursor:pointer"><img src="../assets/close.svg" alt=""></a>
+          <a class="col-sm" @click="()=>closeWindow('w')" style="cursor:pointer"><img src="../assets/close.svg" alt=""></a>
         </div>
-        <div class="mt-1">
-          <Vote v-on:click="()=>addWidget('Poll')"/>
+        <div class="mt-4">
+          <div  v-on:click="()=>addWidget('Poll')"><Vote style="pointer-events: none;"/></div>
+        </div>
+    </div>
+
+    <div :class="queueWindow ? '' : 'd-none'" class="container float-start border" style="margin-top:-0.6%;height:80vh;width:25%;background-color:white">
+        <div class="row mt-3">
+          <p class="col-sm-10 h4">Очередь</p>
+          <a class="col-sm" @click="()=>closeWindow('q')" style="cursor:pointer"><img src="../assets/close.svg" alt=""></a>
+        </div>
+        <div class="mt-5">
+          <Comands class="text-center" :team="roomId"/>
         </div>
     </div>
     <Footer @data="handleData($event)"/>
@@ -51,6 +61,8 @@ import Footer from '@/components/Footer.vue'
 import Vote from '@/components/Vote.vue'
 import PoolChars from '@/components/PoolChars.vue'
 import VoteActive from '@/components/VoteActive'
+import Comands from '@/components/Comands'
+
 import { VueWebRTC } from 'vue-webrtc';
 
 import axios from 'axios'
@@ -58,7 +70,7 @@ import axios from 'axios'
 export default {
   name: 'Home',
   components: {
-    Header,Demo,Footer,Vote,PoolChars,VoteActive,
+    Header,Demo,Footer,Vote,PoolChars,VoteActive,Comands,
     'vue-webrtc': VueWebRTC
   },
   data(){
@@ -73,16 +85,23 @@ export default {
       id:0,
       created: 0,
       roomId: localStorage.getItem('room_id'),
-      widgetsWindow: true
+      widgetsWindow: true,
+      queueWindow: false
     }
   },
   mounted(){
     this.onJoin();
+    // this.$refs.webrtc.enableAudio = false;
     // this.$dispatch('onLeave');
   },
   methods:{
-    closeWindow(){
-      this.widgetsWindow = false;
+    closeWindow(m){
+      if(m == 'q'){
+        this.queueWindow = false;
+      }
+      if(m == 'w'){
+        this.widgetsWindow = false;
+      }
     },
     handleData(cmd){
       if(cmd == 'onLeave'){
@@ -92,6 +111,9 @@ export default {
       if(cmd == 'addWidget'){
         // this.addWidget('Poll')
         this.widgetsWindow = true;
+      }
+      if(cmd == 'teams'){
+        this.queueWindow = true;
       }
       console.log(cmd)
     },

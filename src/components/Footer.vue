@@ -5,7 +5,7 @@
             <a href="#" class="mx-2"><img src="../assets/cam.svg" alt=""></a>
         </span>
         <span>
-            <a href="#" class="mx-2"><img src="../assets/people.svg" alt=""></a>
+            <a href="#" class="mx-2" @click="teams"><img src="../assets/people.svg" alt=""></a>
             <a href="#" class="mx-2"><img src="../assets/queque.svg" alt=""></a>
             <a href="#" class="mx-2"><img src="../assets/chat.svg" alt=""></a>
             <a href="#" class="mx-2"><img src="../assets/screencast.svg" alt=""></a>
@@ -32,6 +32,9 @@ export default {
         },
         addWidget(){
             this.$emit('data','addWidget')
+        },
+        teams(){
+            this.$emit('data','teams')
         }
     }
 }

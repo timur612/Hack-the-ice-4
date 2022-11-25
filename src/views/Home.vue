@@ -1,6 +1,7 @@
 <template>
     <div class="container">
       <!-- <VoteActive/> -->
+      <!-- <Comands/> -->
         <div class="mt-5">
             <input v-model="room_name" type="text">
             <a class="btn" @click="createRoom">create</a>
@@ -34,11 +35,12 @@
 <script>
 import axios from 'axios'
 import VoteActive from '@/components/VoteActive'
+import Comands from '@/components/Comands'
 
 export default {
     name: 'Home',
     components:{
-      VoteActive
+      VoteActive,Comands
     },
     data(){
       return{
@@ -54,7 +56,7 @@ export default {
     methods:{
       async createRoom(){
         const body = JSON.stringify({
-          user_id: 2,
+          user_id: localStorage.getItem('user_id'),
           name: this.room_name
         })
         await axios.post('https://placify-hack-the-ice-4.herokuapp.com/api/room/create',body,{headers: {"Content-Type": "application/json"  }})
