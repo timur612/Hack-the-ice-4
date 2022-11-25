@@ -1,9 +1,6 @@
 <template>
   <div class="home">
     <Header/>
-    <Diagram/>
-    <PoolChars/>
-    <VuePool/>
     <a class="btn" v-on:click="()=>addWidget('some')"> add widget</a>
     <div v-for="(widget,key) in widgets" :key="key">
     <div v-on:click="()=>getNum(key)" :class="widget.clicked === 1 ? 'choosed' : ''" class="container border text-center p-2" style="width:15%;cursor:pointer" ref="draggableContainer" id="draggable-container">
@@ -11,27 +8,22 @@
         <p> {{widget.name}} </p>
       </div>
     </div>
-
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Header from '@/components/Header.vue'
-import Demo from '@/components/Demo.vue'
-import PoolChars from '../components/PoolChars.vue'
-import VuePool from '../components/VuePool.vue'
-import Diagram from '../components/Diagram.vue'
+
+import Header from '../components/Header.vue';
+import Footer from '../components/Footer.vue';
 
 export default {
   name: 'Home',
   components: {
     Header,
-    Demo,
-    PoolChars,
-    VuePool,
-    Diagram
+    Footer
 },
   data(){
     return {

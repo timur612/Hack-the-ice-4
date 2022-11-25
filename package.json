@@ -10,7 +10,8 @@
     "bootstrap": "^5.2.3",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
-    "vue-webrtc": "^3.0.1"
+    "vue-webrtc": "^3.0.1",
+    "vue3-apexcharts": "^1.4.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-router": "~4.5.3",

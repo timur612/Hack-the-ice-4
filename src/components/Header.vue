@@ -6,15 +6,6 @@
     </div>
 </template>
 
-<script>
-import SideBar from '@/components/SideBar.vue'
-export default {
-    components:{
-        SideBar
-    }
-}
-</script>
-
 <style href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" scoped>
 
 </style>
