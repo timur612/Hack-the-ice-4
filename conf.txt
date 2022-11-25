@@ -1,0 +1,16 @@
+user:
+    1. id
+    2. Name
+    3. Role (creater/listener)
+    4. email
+    5. password
+
+Room:
+    1. id
+    2. user_id 
+    3. Name
+
+Widgets:
+    1. id
+    2. room_id
+    3. type
