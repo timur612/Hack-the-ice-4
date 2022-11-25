@@ -16,6 +16,19 @@ class RoomController {
         let rooms = await Room.findAll();
         return res.json(rooms);
     }
+
+    async delete(req,res){
+        try{
+            let {id} = req.body;
+            Room.destroy({where: 
+                {id: id}
+            }).then((rowDeleted)=>{
+                console.log('Deleted');
+            })
+        }catch(e){
+            return res.status(202);
+        }
+    }
 }
 
 module.exports = new RoomController

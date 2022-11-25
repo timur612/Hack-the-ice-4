@@ -11,6 +11,19 @@ class WidgetController{
             return res.status(202);
         }
     }
+
+    async delete(req,res){
+        try{
+            let {id} = req.body;
+            Widget.destroy({where: 
+                {id: id}
+            }).then((rowDeleted)=>{
+                console.log('Deleted');
+            })
+        }catch(e){
+            return res.status(202);
+        }
+    }
 }
 
 module.exports = new WidgetController
