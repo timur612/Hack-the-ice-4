@@ -17,14 +17,20 @@ class RoomController {
         return res.json(rooms);
     }
 
+    async getUsers(req,res){
+        let {user_id} = req.body;
+
+        let rooms = await Room.findAll({where:{user_id}});
+        return res.json(rooms);
+    }
+
     async delete(req,res){
         try{
             let {id} = req.body;
-            Room.destroy({where: 
+            await Room.destroy({where: 
                 {id: id}
-            }).then((rowDeleted)=>{
-                console.log('Deleted');
             })
+            return res.status(101);
         }catch(e){
             return res.status(202);
         }

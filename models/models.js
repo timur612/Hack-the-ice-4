@@ -18,7 +18,9 @@ const Room = sequelize.define('room',{
 const Widget =  sequelize.define('widget',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     room_id: {type: DataTypes.INTEGER},
-    type: {type: DataTypes.STRING}
+    type: {type: DataTypes.STRING},
+    top: {type: DataTypes.STRING},
+    left: {type: DataTypes.STRING},
 });
 
 // User.hasOne(Room);
