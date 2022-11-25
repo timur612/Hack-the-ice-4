@@ -1,6 +1,6 @@
 <template>
     <div>
-     <VueApexCharts type="bar" width="500" :options="chartOptions" :series="series"></VueApexCharts>
+     <VueApexCharts type="bar" width="400" :options="chartOptions" :series="series"></VueApexCharts>
     </div>
 </template>
 
@@ -15,8 +15,8 @@ components: {
     return{
           
           series: [{
-              name: "Desktops",
-              data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+              name: "",
+              data: [10, 25, 35]
           }],
           chartOptions: {
             chart: {
@@ -51,7 +51,7 @@ components: {
                 show:false,
             },
             xaxis: {
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'], labels:{show:false}
+              categories: ['Jan', 'Feb', 'Mar'], labels:{show:false}
             },
             yaxis: {
                 title: {

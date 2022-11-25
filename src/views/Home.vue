@@ -9,6 +9,7 @@
       </div>
     </div>
     </div>
+    <Diagram/>
     <PoolChars/>
     <Vote/>
     <Footer/>
@@ -22,6 +23,7 @@ import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import Vote from '../components/Vote.vue';
 import PoolChars from '../components/PoolChars.vue';
+import Diagram from '../components/Diagram.vue';
 
 export default {
   name: 'Home',
@@ -29,7 +31,8 @@ export default {
     Header,
     Footer,
     Vote,
-    PoolChars
+    PoolChars,
+    Diagram
 },
   data(){
     return {

@@ -2,26 +2,27 @@
     <form>
       <div class="d-flex flex-column">
         <label>What's your favorite fruit?</label>
-        <div> apple <input class="col-1" type="radio" value="apple" v-model="choice" />  </div>
-        <div> orange <input class="col-1" type="radio" value="orange" v-model="choice" />  </div>
-        <div> grape <input class="col-1" type="radio" value="grape" v-model="choice" /> </div>
-        <div class="my-5"></div>
-
-        <div class="d-flex flex-column justify-content-center ms-5">
-          <div style="border: 3px solid #000;width: fit-content"> apple <input class="col-1" type="radio" value="apple" v-model="choice" />  </div>
-          <div style="border: 3px solid #000;width: fit-content"> orange <input class="col-1" type="radio" value="orange" v-model="choice" />  </div>
-          <div style="border: 3px solid #000;width: fit-content"> grape <input class="col-1" type="radio" value="grape" v-model="choice" /> </div>
+        <div class="d-flex bruh flex-column justify-content-center ms-5">
+          <div class="my-1  d-flex justify-content-center" style="border: 2px solid #7e60d4;width: 200px;border-radius: 5px;"><label for="a"> apple</label> <input class="col-1 bruh1" type="radio" value="apple" id="a" v-model="choice" />  </div>
+          <div class="d-flex justify-content-center" style="border: 2px solid #7e60d4;width: 200px;border-radius: 5px;"><label for="aa">orange</label>  <input class="col-1 bruh1" type="radio" value="orange" id="aa" v-model="choice" />  </div>
+          <div class="my-1  d-flex justify-content-center" style="border: 2px solid #7e60d4;width: 200px;border-radius: 5px;"><label for="aaa">grape</label> <input class="col-1 bruh1" type="radio" value="grape" id="aaa" v-model="choice" />  </div>
         </div>
       </div>
-      <button type="button" @click="vote">vote</button>
+      <button class="btn ms-5" style="background-color: #7E60D4; color:white" type="button" @click="vote">vote</button>
     </form>
     <div>
-      <div style="display: none;" v-for="(value, key) of results" :key="key">{{ key }}: {{ value }}</div>
+      <div class="" v-for="(value, key) of results" :key="key">{{ key }}: {{ value }}</div>
     </div>
   </template>
-  
+<style scoped>
+#aaa, #aa, #a{
+  appearance: none;
+}
+#aaa:checked, #aa:checked, #a:checked{
+  background-color: #7E60D4;
+}
+</style>
   <script>
-  
   export default {
     name: "App",
     data() {
