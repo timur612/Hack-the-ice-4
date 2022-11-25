@@ -21,7 +21,7 @@
 Бурнашева Виктория - дизайнер <br>
 Кобяков Дмитрий - менеджер 
 ## Стек технологий:
-Vue.js, WebRTC, Bootstrap, Node.js, Express, postgreSql.
+Vue.js, WebRTC, Bootstrap, Node.js, Express, postgreSql, VueApexCharts.
 ## Project setup
 ```
 npm install
