@@ -33,7 +33,7 @@ export default {
                 passwrod: this.passwrod
             });
 
-            await axios.post('http://localhost:5000/api/user/login',body,{headers: {"Content-Type": "application/json"  }})
+            await axios.post('https://placify-hack-the-ice-4.herokuapp.com/api/user/login',body,{headers: {"Content-Type": "application/json"  }})
                 .then(res => {
                     console.log(res.data)
                     localStorage.setItem('user_id',res.data.id);

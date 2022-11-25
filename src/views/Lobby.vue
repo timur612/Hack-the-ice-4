@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <Demo/>
-    <a :class="created == 0 ? '' : 'disabled'" class="btn" v-on:click="()=>addWidget('some')"> add widget</a>
+    <Header/>
+    <!-- <Demo/> -->
+    <!-- <a :class="created == 0 ? '' : 'disabled'" class="btn" v-on:click="()=>addWidget('some')"> add widget</a> -->
 
     <div v-for="(widget,key) in widgets" :key="key">
       <div ref="draggableContainer" id="draggable-container" style="width:15%;">
@@ -12,9 +13,20 @@
               </div>
             </div>
       </div>
-
-
     </div>
+    <vue-webrtc ref="webrtc"
+                  width="100vw"
+                  height="50vh"
+                  :roomId="roomId"
+                  :enableLogs="true"
+                  v-on:joined-room="logEvent"
+                  v-on:left-room="logEvent"
+                  v-on:opened-room="logEvent"
+                  v-on:share-started="logEvent"
+                  v-on:share-stopped="logEvent"
+                  @error="onError" />
+
+    <Footer @data="handleData($event)"/>
   </div>
 </template>
 
@@ -22,13 +34,15 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import Demo from '@/components/Demo.vue'
+import Footer from '@/components/Footer.vue'
+import { VueWebRTC } from 'vue-webrtc';
 
 import axios from 'axios'
 
 export default {
   name: 'Home',
   components: {
-    Header,Demo
+    Header,Demo,Footer,'vue-webrtc': VueWebRTC
   },
   data(){
     return {
@@ -41,9 +55,45 @@ export default {
       },
       id:0,
       created: 0,
+      roomId: localStorage.getItem('room_id')
     }
   },
+  mounted(){
+    this.onJoin();
+    // this.$dispatch('onLeave');
+  },
   methods:{
+    handleData(cmd){
+      if(cmd == 'onLeave'){
+        this.onLeave();
+        this.$router.push('/')
+      }
+      if(cmd == 'addWidget'){
+        this.addWidget('some')
+      }
+      console.log(cmd)
+    },
+    // WEB RTC
+      onJoin() {
+        // console.log(this.$refs.webrtc);
+          this.$refs.webrtc.join();
+          console.log('ref')
+          console.log(this.$refs.webrtc.$el)
+      },
+      onLeave() {
+        this.$refs.webrtc.leave();
+      },
+      onShareScreen() {
+        this.img = this.$refs.webrtc.shareScreen();
+      },
+      onError(error, stream) {
+          console.log('On Error Event', error, stream);
+      },
+      logEvent(event) {
+          console.log('Event : ', event);
+      },
+     // WEB RTC
+
     async addWidget(n){
       const body = JSON.stringify({
         room_id: localStorage.getItem('room_id'),
@@ -52,7 +102,7 @@ export default {
         left:"0px"
       })
 
-      await axios.post('http://localhost:5000/api/widget/create',body,{headers: {"Content-Type": "application/json"  }})
+      await axios.post('https://placify-hack-the-ice-4.herokuapp.com/api/widget/create',body,{headers: {"Content-Type": "application/json"  }})
         .then(res=>{
           this.widgets.push({id:res.data.id,name: n,clicked:1});
           this.id = this.widgets.length - 1;
@@ -79,7 +129,7 @@ export default {
         left: left
       })
 
-      await axios.post('http://localhost:5000/api/widget/update',body,{headers: {"Content-Type": "application/json"  }})
+      await axios.post('https://placify-hack-the-ice-4.herokuapp.com/api/widget/update',body,{headers: {"Content-Type": "application/json"  }})
         .catch(res=>{})
     },
     getNum(id){
@@ -133,4 +183,5 @@ export default {
   .choosed{
     background:red;
   }
+  
 </style>

@@ -11,7 +11,7 @@
             <div class="container" v-for="(room,key) in rooms" :key=key>
               <div class="row border rounded p-2" style="width:30%">
                 <p class="col-sm"> {{room.name}} </p>
-                <a class="col-sm btn btn-primary" @click="()=>connectRoom(key)">connnect</a>
+                <a class="col-sm btn btn-primary" @click="()=>connectRoom(room.id)">connnect</a>
               </div>
               
             </div>
@@ -21,7 +21,7 @@
             <div class="container" v-for="(room,key) in myrooms" :key=key>
               <div class="row border rounded p-2" style="width:30%">
                 <p class="col-sm"> {{room.name}} </p>
-                <a class="col-sm btn btn-primary" @click="()=>connectMyRoom(key)">connnect</a>
+                <a class="col-sm btn btn-primary" @click="()=>{connectMyRoom(room.id)}">connnect</a>
               </div>
               
             </div>
@@ -52,7 +52,7 @@ export default {
           user_id: 2,
           name: this.room_name
         })
-        await axios.post('http://localhost:5000/api/room/create',body,{headers: {"Content-Type": "application/json"  }})
+        await axios.post('https://placify-hack-the-ice-4.herokuapp.com/api/room/create',body,{headers: {"Content-Type": "application/json"  }})
           .then((res)=>{
             console.log(res.data);
             localStorage.setItem('room_id',res.data.id);
@@ -64,15 +64,19 @@ export default {
         
       },
       connectRoom(i){
-        this.$router.push('/room/'+this.rooms[i].id);
+        this.$router.push('/room/'+i);
+        localStorage.setItem('room_id',i);
       },
       connectMyRoom(i){
-        this.$router.push('/myroom/'+this.rooms[i].id);
+        this.$router.push('/myroom/'+i);
+        localStorage.setItem('room_id',i);
+        // this.$emit()
       },
       async getRooms(){
-        await axios.get('http://localhost:5000/api/room/getAll')
+        await axios.get('https://placify-hack-the-ice-4.herokuapp.com/api/room/getAll')
           .then(res=>{
               this.rooms = res.data;
+              console.log(this.rooms)
           })
           .catch(e => {
             console.log(e);
@@ -82,7 +86,7 @@ export default {
         const body = JSON.stringify({
           user_id: localStorage.getItem('user_id')
         })
-        await axios.post('http://localhost:5000/api/room/getUsers',body,{headers: {"Content-Type": "application/json"  }})
+        await axios.post('https://placify-hack-the-ice-4.herokuapp.com/api/room/getUsers',body,{headers: {"Content-Type": "application/json"  }})
           .then(res=>{
             this.myrooms = res.data
           })

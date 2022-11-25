@@ -57,6 +57,7 @@
         methods: {
             onJoin() {
                 this.$refs.webrtc.join();
+                
                 console.log('refs:')
                 console.log(this.$refs.webrtc);
             },
@@ -85,12 +86,18 @@
         background: transparent !important;
     }
     .video-item {
-        width: 50%;
+       
+        position:absolute;
+        top:0;
+        z-index: -1;
+        left:0;
         display: inline-block;
         background: transparent !important;
     }
     .video-item video {
-        width: 100%;
-        height: auto;
+        width: 100vw;
+        height: 90vh;
+        object-fit: cover;
+        transform: scale(-1,1);   
     }
 </style>
