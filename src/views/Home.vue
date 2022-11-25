@@ -1,92 +1,100 @@
 <template>
-  <div class="home">
-    <!-- <Header/>
-    <Demo/> -->
-    <a class="btn" v-on:click="()=>addWidget('some')"> add widget</a>
-    <div v-for="(widget,key) in widgets" :key="key">
-    <div v-on:click="()=>getNum(key)" :class="widget.clicked === 1 ? 'choosed' : ''" class="container border text-center p-2" style="width:15%;cursor:pointer" ref="draggableContainer" id="draggable-container">
-      <div id="draggable-header" @mousedown="dragMouseDown">
-        <p> {{widget.name}} </p>
-      </div>
-    </div>
+    <div class="container">
+        <div class="mt-5">
+            <input v-model="room_name" type="text">
+            <a class="btn" @click="createRoom">create</a>
+        </div>
 
+        <div class="row">
+          <div class="col-sm">
+            <p class="h5">Rooms:</p>
+            <div class="container" v-for="(room,key) in rooms" :key=key>
+              <div class="row border rounded p-2" style="width:30%">
+                <p class="col-sm"> {{room.name}} </p>
+                <a class="col-sm btn btn-primary" @click="()=>connectRoom(key)">connnect</a>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-sm">
+            <p class="h5">My rooms:</p>
+            <div class="container" v-for="(room,key) in myrooms" :key=key>
+              <div class="row border rounded p-2" style="width:30%">
+                <p class="col-sm"> {{room.name}} </p>
+                <a class="col-sm btn btn-primary" @click="()=>connectMyRoom(key)">connnect</a>
+              </div>
+              
+            </div>
+          </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Header from '@/components/Header.vue'
-import Demo from '@/components/Demo.vue'
+import axios from 'axios'
 
 export default {
-  name: 'Home',
-  components: {
-    Header,Demo
-  },
-  data(){
-    return {
-      widgets: [],
-      positions: {
-        clientX: undefined,
-        clientY: undefined,
-        movementX: 0,
-        movementY: 0
-      },
-      id:0,
-    }
-  },
-  methods:{
-    addWidget(n){
-      this.widgets.push({name: n,clicked:0});
-    },
-    getNum(id){
-      this.id = id;
-      for(let i = 0; i < this.widgets.length; i++){
-        if(i != id){
-          this.widgets[i].clicked = 0;
-        }else{
-          this.widgets[i].clicked = 1;
-        }
+    name: 'Home',
+    data(){
+      return{
+        room_name: '',
+        rooms: [],
+        myrooms: []
       }
-      
     },
-    dragMouseDown: function (event,id) {
-      event.preventDefault()
-      // get the mouse cursor position at startup:
-      this.positions.clientX = event.clientX
-      this.positions.clientY = event.clientY
-      document.onmousemove = this.elementDrag
-      document.onmouseup = this.closeDragElement
+    mounted(){
+      this.getRooms();
+      this.getUsersRooms();
     },
-    elementDrag: function (event) {
-      event.preventDefault()
-      this.positions.movementX = this.positions.clientX - event.clientX
-      this.positions.movementY = this.positions.clientY - event.clientY
-      this.positions.clientX = event.clientX
-      this.positions.clientY = event.clientY
-      // set the element's new position:
-      // console.log(this.$refs.draggableContainer[0].style)
-      this.$refs.draggableContainer[this.id].style.top = (this.$refs.draggableContainer[this.id].offsetTop - this.positions.movementY) + 'px'
-      this.$refs.draggableContainer[this.id].style.left = (this.$refs.draggableContainer[this.id].offsetLeft - this.positions.movementX) + 'px'
-    },
-    closeDragElement () {
-      document.onmouseup = null
-      document.onmousemove = null
+    methods:{
+      async createRoom(){
+        const body = JSON.stringify({
+          user_id: 2,
+          name: this.room_name
+        })
+        await axios.post('http://localhost:5000/api/room/create',body,{headers: {"Content-Type": "application/json"  }})
+          .then((res)=>{
+            console.log(res.data);
+            localStorage.setItem('room_id',res.data.id);
+            this.$router.push('/myroom/'+res.data.id);
+          })
+          .catch(e => {
+            console.log(e);
+          })
+        
+      },
+      connectRoom(i){
+        this.$router.push('/room/'+this.rooms[i].id);
+      },
+      connectMyRoom(i){
+        this.$router.push('/myroom/'+this.rooms[i].id);
+      },
+      async getRooms(){
+        await axios.get('http://localhost:5000/api/room/getAll')
+          .then(res=>{
+              this.rooms = res.data;
+          })
+          .catch(e => {
+            console.log(e);
+          })
+      },
+      async getUsersRooms(){
+        const body = JSON.stringify({
+          user_id: localStorage.getItem('user_id')
+        })
+        await axios.post('http://localhost:5000/api/room/getUsers',body,{headers: {"Content-Type": "application/json"  }})
+          .then(res=>{
+            this.myrooms = res.data
+          })
+          .catch(e => {
+            console.log(e);
+          })
+      }
     }
-  }
 }
 </script>
 
 <style scoped>
-  #draggable-container {
-    position: absolute;
-    z-index: 9;
-  }
-  #draggable-header {
-    z-index: 10;
-  }
-  .choosed{
-    background:red;
-  }
+
 </style>
+

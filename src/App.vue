@@ -4,6 +4,16 @@
   <router-view/>
 </template>
 
+<script>
+export default {
+  mounted(){
+    if(!localStorage.getItem('user_id')){
+      this.$router.push('/login')
+    }
+  }
+}
+</script>
+
 <style>
 
 </style>

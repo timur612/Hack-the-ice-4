@@ -13,6 +13,8 @@
                                 width="100%"
                                 :roomId="roomId"
                                 :enableLogs="true"
+                                :enableAudio="false"
+                                :enableVideo="false"
                                 v-on:joined-room="logEvent"
                                 v-on:left-room="logEvent"
                                 v-on:opened-room="logEvent"
@@ -24,18 +26,9 @@
                     <div class="col-md-12 my-3">
                         <button type="button" class="btn btn-primary" @click="onJoin">Join</button>
                         <button type="button" class="btn btn-primary" @click="onLeave">Leave</button>
-                        <button type="button" class="btn btn-primary" @click="onCapture">Capture Photo</button>
                         <button type="button" class="btn btn-primary" @click="onShareScreen">Share Screen</button>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Captured Image</h2>
-                <figure class="figure">
-                    <img :src="img" class="img-responsive" />
-                </figure>
             </div>
         </div>
     </div>
@@ -51,21 +44,21 @@
         data() {
             return {
                 img: null,
-                roomId: "public-room-v3"
+                roomId: "private-room-liver"
             };
         },
-        mounted: function () {
+        mounted() {
+            
         },
         computed: {
         },
         watch: {
         },
         methods: {
-            onCapture() {
-                this.img = this.$refs.webrtc.capture();
-            },
             onJoin() {
                 this.$refs.webrtc.join();
+                console.log('refs:')
+                console.log(this.$refs.webrtc);
             },
             onLeave() {
                 this.$refs.webrtc.leave();
@@ -86,5 +79,18 @@
 <style>
     .btn {
        margin-right: 8px;
+    }
+    .video-list {
+        margin-bottom: 10px;
+        background: transparent !important;
+    }
+    .video-item {
+        width: 50%;
+        display: inline-block;
+        background: transparent !important;
+    }
+    .video-item video {
+        width: 100%;
+        height: auto;
     }
 </style>
