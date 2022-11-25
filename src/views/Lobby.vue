@@ -9,7 +9,8 @@
         <a v-if="widget.clicked" v-on:click="atacchWidget" class="btn position-absolute">X</a>
             <div v-on:click="()=>getNum(key)" :class="widget.clicked === 1 ? 'choosed' : ''" class="container border text-center p-2" style="cursor:pointer" >
               <div id="draggable-header" @mousedown="dragMouseDown">
-                <p> {{widget.name}} </p>
+                <!-- <Vote v-if="widget.type === 'Poll'"/> -->
+                <p> {{widget}} </p>
               </div>
             </div>
       </div>
@@ -18,6 +19,7 @@
                   width="100vw"
                   height="50vh"
                   :roomId="roomId"
+                  :enableAudio="true"
                   :enableLogs="true"
                   v-on:joined-room="logEvent"
                   v-on:left-room="logEvent"
@@ -25,7 +27,15 @@
                   v-on:share-started="logEvent"
                   v-on:share-stopped="logEvent"
                   @error="onError" />
-
+    <div class="container float-end border" style="margin-top:-0.6%;height:80vh;width:25%;background-color:white">
+        <div class="row">
+          <p class="col-sm-10 h4">Виджеты</p>
+          <a class="col-sm"><img src="../assets/close.svg" alt=""></a>
+        </div>
+        <div class="mt-1">
+          <PoolChars/>
+        </div>
+    </div>
     <Footer @data="handleData($event)"/>
   </div>
 </template>
@@ -35,6 +45,8 @@
 import Header from '@/components/Header.vue'
 import Demo from '@/components/Demo.vue'
 import Footer from '@/components/Footer.vue'
+import Vote from '@/components/Vote.vue'
+import PoolChars from '@/components/PoolChars.vue'
 import { VueWebRTC } from 'vue-webrtc';
 
 import axios from 'axios'
@@ -42,7 +54,8 @@ import axios from 'axios'
 export default {
   name: 'Home',
   components: {
-    Header,Demo,Footer,'vue-webrtc': VueWebRTC
+    Header,Demo,Footer,Vote,PoolChars,
+    'vue-webrtc': VueWebRTC
   },
   data(){
     return {
@@ -69,7 +82,7 @@ export default {
         this.$router.push('/')
       }
       if(cmd == 'addWidget'){
-        this.addWidget('some')
+        // this.addWidget('Poll')
       }
       console.log(cmd)
     },
@@ -104,7 +117,7 @@ export default {
 
       await axios.post('https://placify-hack-the-ice-4.herokuapp.com/api/widget/create',body,{headers: {"Content-Type": "application/json"  }})
         .then(res=>{
-          this.widgets.push({id:res.data.id,name: n,clicked:1});
+          this.widgets.push({id:res.data.id,type: n,clicked:1});
           this.id = this.widgets.length - 1;
           this.created = 1;
         })

@@ -9,7 +9,8 @@
             <a href="#" class="mx-2"><img src="../assets/queque.svg" alt=""></a>
             <a href="#" class="mx-2"><img src="../assets/chat.svg" alt=""></a>
             <a href="#" class="mx-2"><img src="../assets/screencast.svg" alt=""></a>
-            <a class="mx-2" @click="addWidget"><img src="../assets/squares.svg" alt=""></a>
+            <a class="mx-2"><img src="../assets/squares.svg" alt=""></a>
+            <a class="mx-2" style="cursor:pointer" @click="addWidget"><img src="../assets/widget.svg" alt=""></a>
             <a href="#" class="mx-2"><img src="../assets/dots.svg" alt=""></a>
         </span>
         <span>
