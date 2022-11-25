@@ -1,6 +1,6 @@
 <template>
     <div>
-     <VueApexCharts type="bar" width="650" :options="chartOptions" :series="series"></VueApexCharts>
+     <VueApexCharts type="bar" width="500" :options="chartOptions" :series="series"></VueApexCharts>
     </div>
 </template>
 
@@ -26,14 +26,19 @@ components: {
                 enabled: false
               }
             },
-            colors:['#795AD2'],
+            colors:['#7E60D4'],
             plotOptions:{
                 bar:{
-                    horizontal:true
+                    dataLabels:{
+                        position:'center',
+                        total:{
+                            enabled:true,
+                        
+                        }
+                    },
+                    borderRadius:5,
+                    horizontal:true,
                 }
-            },
-            dataLabels: {
-              enabled: false
             },
             stroke: {
               curve: 'straight'
@@ -43,17 +48,16 @@ components: {
               align: 'left'
             },
             grid: {
-              row: {
-                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.5
-              },
+                show:false,
             },
             xaxis: {
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'], labels:{show:false}
             },
-            bar:{
-                horizontal: true
-            }
+            yaxis: {
+                title: {
+                    text: undefined
+                },
+            },
           },
         }
         },
