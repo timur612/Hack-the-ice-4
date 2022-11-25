@@ -6,10 +6,10 @@
         </div>
         <div v-for="(widget,key) in widgets" :key="key">
         <div ref="draggableContainer" class="position-absolute" id="draggable-container" style="width:15%;">
-                <div  class="container border text-center p-2"  >
+                <div  class="container"  >
                     <div id="draggable-header">
-                        <!-- <Vote v-if="widget.type === 'Poll'"/> -->
-                        <p> {{widget.type}} </p>
+                        <VoteActive :lobby="true" :id="widget.id" v-if="widget.type === 'Poll'"/>
+                        <!-- <p> {{widget.type}} </p> -->
                     </div>
                 </div>
         </div>
@@ -39,13 +39,14 @@ import Demo from '@/components/Demo.vue'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import Vote from '@/components/Vote.vue'
+import VoteActive from '@/components/VoteActive'
 import axios from 'axios';
 import { VueWebRTC } from 'vue-webrtc';
 
 export default {
     name:"Room",
     components:{
-        Demo, Header, Footer,'vue-webrtc': VueWebRTC,Vote
+        Demo, Header, Footer,'vue-webrtc': VueWebRTC,Vote,VoteActive
     },
     data(){
         return{

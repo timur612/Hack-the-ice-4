@@ -1,22 +1,37 @@
 <template>
     <div>
-     <VueApexCharts type="bar" width="400" :options="chartOptions" :series="series"></VueApexCharts>
+     <VueApexCharts type="bar" width="400" :options="chartOptions" :series="series"/>
     </div>
 </template>
 
 <script>
 import VueApexCharts from "vue3-apexcharts"
 
+import axios from 'axios'
 export default {  
 components: {
     VueApexCharts
   },
+  props:['data1','data2','data3'],
+  computed(){
+    // this.series[0].data = [this.data1,this.data2,this.data3];
+    // console.log(this.data1)
+    // setInterval(this.add,5000)
+    this.add();
+  },
+  methods:{
+    add(){
+      this.series[0].data[0] += 1;
+    }
+  },
   data: function() { 
     return{
-          
+          ddata1:1,
+          // data2:0,
+          // data3:0,
           series: [{
               name: "",
-              data: [10, 25, 35]
+              data: [this.data1,this.data2,0]
           }],
           chartOptions: {
             chart: {
@@ -51,7 +66,7 @@ components: {
                 show:false,
             },
             xaxis: {
-              categories: ['Jan', 'Feb', 'Mar'], labels:{show:false}
+              categories: ['apple', 'orange', 'grape'], labels:{show:false}
             },
             yaxis: {
                 title: {

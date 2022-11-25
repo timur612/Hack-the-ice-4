@@ -4,17 +4,20 @@
     <!-- <Demo/> -->
     <!-- <a :class="created == 0 ? '' : 'disabled'" class="btn" v-on:click="()=>addWidget('some')"> add widget</a> -->
 
+    <!-- WIDGET -->
     <div v-for="(widget,key) in widgets" :key="key">
       <div ref="draggableContainer" id="draggable-container" style="width:15%;">
-        <a v-if="widget.clicked" v-on:click="atacchWidget" class="btn position-absolute">X</a>
-            <div v-on:click="()=>getNum(key)" :class="widget.clicked === 1 ? 'choosed' : ''" class="container border text-center p-2" style="cursor:pointer" >
+        <a v-if="widget.clicked" v-on:click="atacchWidget" style="top:-10%" class="btn position-absolute">X</a>
+            <div v-on:click="()=>getNum(key)" :class="widget.clicked === 1 ? 'choosed' : ''" class="" style="cursor:pointer;" >
               <div id="draggable-header" @mousedown="dragMouseDown">
-                <!-- <Vote v-if="widget.type === 'Poll'"/> -->
-                <p> {{widget}} </p>
+                <VoteActive :lobby="false" :id="widget.id" v-if="widget.type === 'Poll'"/>
+                <!-- <p> {{widget}} </p> -->
               </div>
             </div>
       </div>
     </div>
+    <!-- WIDGET -->
+
     <vue-webrtc ref="webrtc"
                   width="100vw"
                   height="50vh"
@@ -27,13 +30,13 @@
                   v-on:share-started="logEvent"
                   v-on:share-stopped="logEvent"
                   @error="onError" />
-    <div class="container float-end border" style="margin-top:-0.6%;height:80vh;width:25%;background-color:white">
+    <div :class="widgetsWindow ? '' : 'd-none'" class="container float-end border" style="margin-top:-0.6%;height:80vh;width:25%;background-color:white">
         <div class="row">
           <p class="col-sm-10 h4">Виджеты</p>
-          <a class="col-sm"><img src="../assets/close.svg" alt=""></a>
+          <a class="col-sm" @click="closeWindow" style="cursor:pointer"><img src="../assets/close.svg" alt=""></a>
         </div>
         <div class="mt-1">
-          <PoolChars/>
+          <Vote v-on:click="()=>addWidget('Poll')"/>
         </div>
     </div>
     <Footer @data="handleData($event)"/>
@@ -47,6 +50,7 @@ import Demo from '@/components/Demo.vue'
 import Footer from '@/components/Footer.vue'
 import Vote from '@/components/Vote.vue'
 import PoolChars from '@/components/PoolChars.vue'
+import VoteActive from '@/components/VoteActive'
 import { VueWebRTC } from 'vue-webrtc';
 
 import axios from 'axios'
@@ -54,7 +58,7 @@ import axios from 'axios'
 export default {
   name: 'Home',
   components: {
-    Header,Demo,Footer,Vote,PoolChars,
+    Header,Demo,Footer,Vote,PoolChars,VoteActive,
     'vue-webrtc': VueWebRTC
   },
   data(){
@@ -68,7 +72,8 @@ export default {
       },
       id:0,
       created: 0,
-      roomId: localStorage.getItem('room_id')
+      roomId: localStorage.getItem('room_id'),
+      widgetsWindow: true
     }
   },
   mounted(){
@@ -76,6 +81,9 @@ export default {
     // this.$dispatch('onLeave');
   },
   methods:{
+    closeWindow(){
+      this.widgetsWindow = false;
+    },
     handleData(cmd){
       if(cmd == 'onLeave'){
         this.onLeave();
@@ -83,6 +91,7 @@ export default {
       }
       if(cmd == 'addWidget'){
         // this.addWidget('Poll')
+        this.widgetsWindow = true;
       }
       console.log(cmd)
     },
@@ -194,7 +203,8 @@ export default {
     z-index: 10;
   }
   .choosed{
-    background:red;
+    /* background:red; */
+    color:red;
   }
   
 </style>

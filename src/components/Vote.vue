@@ -6,23 +6,15 @@
           <input name="options-outlined" class=" btn-check" type="radio" value="apple" id="success-outlined-3" v-model="choice" autocomplete="off" /><label class="btn btn-outline-success my-2" for="success-outlined-3">apple</label> 
           <input name="options-outlined" class=" btn-check" type="radio" value="orange" id="success-outlined-2" v-model="choice" autocomplete="off" /><label class="btn btn-outline-success" for="success-outlined-2">orange</label>  
           <input name="options-outlined" class=" btn-check" type="radio" value="grape"  id="success-outlined-1" v-model="choice" autocomplete="off" /><label class="btn btn-outline-success my-2" for="success-outlined-1" >grape</label>  
-          <button class="btn mx-5" style="background-color: #7E60D4; color:white" type="button" @click="vote">Vote</button>
+          <button class="btn mx-5" style="background-color: #7E60D4; color:white" type="button" @click="vote2">Vote</button>
         </div>
-        <button type="button" @click="vote">vote</button>
-      </form>
-      <div class="d-none ">
-        <div style="display: none;" v-for="(value, key) of results" :key="key">{{ key }}: {{ value }}</div>
       </div>
     </form>
-    <div>
-      <div class="invisible" v-for="(value, key) of results" :key="key">{{ key }}: {{ value }}</div>
-    </div>
+    <!-- <div>
+      <div class="" v-for="(value, key) of results" :key="key">{{ key }}: {{ value }}</div>
+    </div> -->
   </template>
-<style scoped>
-label input:checked{
-  background: #7E60D4;
-}
-</style>
+
   <script>
   export default {
     name: "App",
@@ -46,6 +38,9 @@ label input:checked{
         localStorage.setItem("vote-result", JSON.stringify(results));
         this.results = JSON.parse(localStorage.getItem("vote-result"));
       },
+      vote2(){
+        this.$emit("data",this.choice);
+      }
     },
   };
   </script>

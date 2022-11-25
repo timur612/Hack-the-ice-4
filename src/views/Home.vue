@@ -1,10 +1,11 @@
 <template>
     <div class="container">
+      <!-- <VoteActive/> -->
         <div class="mt-5">
             <input v-model="room_name" type="text">
             <a class="btn" @click="createRoom">create</a>
         </div>
-
+        
         <div class="row">
           <div class="col-sm">
             <p class="h5">Rooms:</p>
@@ -32,9 +33,13 @@
 
 <script>
 import axios from 'axios'
+import VoteActive from '@/components/VoteActive'
 
 export default {
     name: 'Home',
+    components:{
+      VoteActive
+    },
     data(){
       return{
         room_name: '',
