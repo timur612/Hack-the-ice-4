@@ -1,29 +1,29 @@
 <template>
-  <div class="container">
-      <form class="form-check">
-        <div class="d-flex flex-column">
-          <label>What's your favorite fruit?</label>
-          <div> apple <input class="col-1" type="radio" value="apple" v-model="choice" />  </div>
-          <div> orange <input class="col-1" type="radio" value="orange" v-model="choice" />  </div>
-          <div> grape <input class="col-1" type="radio" value="grape" v-model="choice" /> </div>
-          <div class="my-5"></div>
-
-          <div class="d-flex flex-column justify-content-center ms-5">
-            <div style="border: 3px solid #000;width: fit-content"> apple <input class="col-1" type="radio" value="apple" v-model="choice" />  </div>
-            <div style="border: 3px solid #000;width: fit-content"> orange <input class="col-1" type="radio" value="orange" v-model="choice" />  </div>
-            <div style="border: 3px solid #000;width: fit-content"> grape <input class="col-1" type="radio" value="grape" v-model="choice" /> </div>
-          </div>
+    <form>
+      <div class="d-flex flex-column card " style="width: 200px;">
+        <label class="d-flex justify-content-center mt-2">What's your favorite fruit?</label>
+        <div class="card-body d-flex flex-column justify-content-center my-2" style="width: 200px;">
+          <input name="options-outlined" class=" btn-check" type="radio" value="apple" id="success-outlined-3" v-model="choice" autocomplete="off" /><label class="btn btn-outline-success my-2" for="success-outlined-3">apple</label> 
+          <input name="options-outlined" class=" btn-check" type="radio" value="orange" id="success-outlined-2" v-model="choice" autocomplete="off" /><label class="btn btn-outline-success" for="success-outlined-2">orange</label>  
+          <input name="options-outlined" class=" btn-check" type="radio" value="grape"  id="success-outlined-1" v-model="choice" autocomplete="off" /><label class="btn btn-outline-success my-2" for="success-outlined-1" >grape</label>  
+          <button class="btn mx-5" style="background-color: #7E60D4; color:white" type="button" @click="vote">Vote</button>
         </div>
         <button type="button" @click="vote">vote</button>
       </form>
       <div class="d-none ">
         <div style="display: none;" v-for="(value, key) of results" :key="key">{{ key }}: {{ value }}</div>
       </div>
-  </div>
-</template>
-  
+    </form>
+    <div>
+      <div class="invisible" v-for="(value, key) of results" :key="key">{{ key }}: {{ value }}</div>
+    </div>
+  </template>
+<style scoped>
+label input:checked{
+  background: #7E60D4;
+}
+</style>
   <script>
-  
   export default {
     name: "App",
     data() {
