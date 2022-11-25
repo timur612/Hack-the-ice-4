@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-lg bg-dark ">
+        <nav class="navbar navbar-expand-lg bg-dark" style="height:76px ;">
             <img class="ms-5" src="../assets/logo.png" alt="">
         </nav>
     </div>

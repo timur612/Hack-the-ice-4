@@ -9,6 +9,8 @@
       </div>
     </div>
     </div>
+    <PoolChars/>
+    <Vote/>
     <Footer/>
   </div>
 </template>
@@ -18,12 +20,16 @@
 
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
+import Vote from '../components/Vote.vue';
+import PoolChars from '../components/PoolChars.vue';
 
 export default {
   name: 'Home',
   components: {
     Header,
-    Footer
+    Footer,
+    Vote,
+    PoolChars
 },
   data(){
     return {
