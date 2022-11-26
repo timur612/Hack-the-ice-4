@@ -15,5 +15,11 @@ export default {
 </script>
 
 <style>
-
+#nav{
+  background-color: #222222;
+}
+template{
+  overflow: hidden;
+  background-color: #2f2f2f;
+}
 </style>
