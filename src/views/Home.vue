@@ -3,13 +3,10 @@
     <div class="container-fluid"  style="background-color:#2F2F2F; overflow-y: hidden;" >
       <!-- <VoteActive/> -->
       <!-- <Comands/> -->
-        <div class="mt-5">
-            <input v-model="room_name" type="text">
-            <a class="btn" @click="createRoom">create</a>
-        </div>
-
-        
-        
+      <div class="p-2 d-flex flex-column justify-content-center" style="border-radius: 5px;border-color: #222222; margin-top: 10px; width: 200px; background-color: #222222;">
+                <p class="col-sm text-center" style="color: white;"> {{room.name}} </p>
+                <a class="col-sm btn" style="background-color: #7E60D4; color:white" @click="()=>connectRoom(room.id)">connnect</a>
+      </div>
         <div class="justify-content-center align-content-center" style="background-color:#2F2F2F;">
           <div class="pt-5">
             <input v-model="room_name" type="text">
