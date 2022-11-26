@@ -1,12 +1,9 @@
 <template >
   <Header/>
-    <div class="container-fluid"  style="background-color:#2F2F2F; overflow-y: hidden;" >
+    <div class="container-fluid"  >
       <!-- <VoteActive/> -->
       <!-- <Comands/> -->
-      <div class="p-2 d-flex flex-column justify-content-center" style="border-radius: 5px;border-color: #222222; margin-top: 10px; width: 200px; background-color: #222222;">
-                <p class="col-sm text-center" style="color: white;"> {{room.name}} </p>
-                <a class="col-sm btn" style="background-color: #7E60D4; color:white" @click="()=>connectRoom(room.id)">connnect</a>
-      </div>
+        
         <div class="justify-content-center align-content-center" style="background-color:#2F2F2F;">
           <div class="pt-5">
             <input v-model="room_name" type="text">
@@ -25,22 +22,18 @@
         </div>
 </template>
 <style>
-template{
-  background-color: #222222;
-  overflow: hidden;
-}
 </style>
 <script>
 import axios from 'axios'
 import VoteActive from '@/components/VoteActive'
 import Comands from '@/components/Comands'
-
+import Header from '../components/Header.vue'
 
 export default {
     name: 'Home',
     components:{
 
-      VoteActive,Comands
+      VoteActive,Comands,Header
     },
 
     data(){

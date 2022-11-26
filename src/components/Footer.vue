@@ -1,5 +1,5 @@
 <template >
-    <div class="bg-dark container-fluid align-items-center d-flex d-flex justify-content-between" style="height:76px; position:fixed; bottom:0;">
+    <div id="sheet" class=" container-fluid align-items-center d-flex d-flex justify-content-between" style="height:76px; position:fixed; bottom:0;">
         <span>
             <a href="#" class="mx-2"><img src="../assets/mic.svg" alt=""></a>
             <a href="#" class="mx-2"><img src="../assets/cam.svg" alt=""></a>
@@ -14,11 +14,15 @@
             <a href="#" class="mx-2"><img src="../assets/dots.svg" alt=""></a>
         </span>
         <span>
-            <a href="#" @click="leaveOn"><img src="../assets/off.svg" alt=""></a>
+            <a href="#" @click="leaveOn" ><img src="../assets/off.svg" alt=""></a>
         </span>
     </div>
 </template>
-
+<style>
+#sheet{
+    background-color: #222222;
+}
+</style>
 <script>
 export default {
     data(){

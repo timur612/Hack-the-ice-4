@@ -3,6 +3,7 @@
         <p class="h5 unselectable text-muted"> {{k1}} </p>
         <p class="h4 unselectable">{{k2}} </p>
         <p class="h5 unselectable text-muted" style="cursor:pointer">{{k3}} </p>
+        <a id="next" @click="()=>next(k1)" style="cursor: pointer;">next</a>
     </div>
 </template>
 

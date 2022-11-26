@@ -20,7 +20,7 @@
 
     <vue-webrtc ref="webrtc"
                   width="100vw"
-                  height="50vh"
+                  height="100vh"
                   :roomId="roomId"
                   :enableAudio="false"
                   :enableLogs="true"
