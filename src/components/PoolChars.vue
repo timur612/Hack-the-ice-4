@@ -37,6 +37,9 @@ components: {
             chart: {
               height: 350,
               type: 'Bar',
+              toolbox:{
+                show:false,
+              },
               zoom: {
                 enabled: false
               }
@@ -59,14 +62,14 @@ components: {
               curve: 'straight'
             },
             title: {
-              text: 'Product Trends by Month',
+              text: 'Какой стикерпак лучше?',
               align: 'left'
             },
             grid: {
                 show:false,
             },
             xaxis: {
-              categories: ['apple', 'orange', 'grape'], labels:{show:false}
+              categories: ['Вариант 1', 'Вариант 2', 'Вариант 3'], labels:{show:false}
             },
             yaxis: {
                 title: {

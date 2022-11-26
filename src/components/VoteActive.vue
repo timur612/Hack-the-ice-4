@@ -39,6 +39,9 @@ export default {
             chart: {
               height: 350,
               type: 'Bar',
+              toolbox:{
+                show:false,
+              },
               zoom: {
                 enabled: false
               }
@@ -68,7 +71,7 @@ export default {
                 show:false,
             },
             xaxis: {
-              categories: ['apple', 'orange', 'grape'], labels:{show:false}
+              categories: ['Вариант 1', 'Вариант 2', 'Вариант 3'], labels:{show:false}
             },
             yaxis: {
                 title: {
