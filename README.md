@@ -10,7 +10,7 @@
   <ul>Собственная потоковая видео-трансляция.</ul>
 </li>
 <li>
-  <ul>Настраевыемые виджеты в прямом эфире.</ul>
+  <ul>Виджеты в прямом эфире.</ul>
 </li>
 
 ## О команде:
@@ -21,7 +21,7 @@
 Бурнашева Виктория - дизайнер <br>
 Кобяков Дмитрий - менеджер 
 ## Стек технологий:
-Vue.js, WebRTC, Bootstrap, Node.js, Express, postgreSql, VueApexCharts.
+Vue.js, WebRTC, Bootstrap, Node.js, Express, supabase, хост hiroku, VueApexCharts.
 ## Project setup
 ```
 npm install
